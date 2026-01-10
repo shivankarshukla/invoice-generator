@@ -110,14 +110,12 @@ button:active {
 
   /* Fix invoice preview container */
   .invoice-preview-container {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
+    position: static !important;
     background: white !important;
     z-index: 9999 !important;
     overflow: visible !important;
+    height: auto !important;
+    min-height: auto !important;
   }
 
   .invoice-preview-container > div:first-child {
@@ -126,6 +124,7 @@ button:active {
     padding: 0 !important;
     margin: 0 !important;
     min-height: auto !important;
+    height: auto !important;
   }
 
   .invoice-preview-container > div:first-child > div {
@@ -134,6 +133,7 @@ button:active {
     box-shadow: none !important;
     border: none !important;
     border-radius: 0 !important;
+    page-break-after: avoid !important;
   }
 
   /* Hide non-printable elements */
@@ -163,6 +163,23 @@ button:active {
 
   tr {
     page-break-inside: avoid;
+  }
+
+  /* Prevent blank pages - remove any forced heights */
+  body,
+  html,
+  #root,
+  .invoice-preview-container,
+  .invoice-preview-container > div,
+  .invoice-preview-container > div > div {
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+  }
+
+  /* Only break page if content actually overflows */
+  .invoice-preview-container > div:first-child > div {
+    page-break-after: auto !important;
   }
 }
 
