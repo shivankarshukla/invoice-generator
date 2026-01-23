@@ -52,9 +52,9 @@ export default function InvoicePreview({ data, onClose }: InvoicePreviewProps) {
             </div>
 
             {/* From and To Section */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div className="flex flex-col md:flex-row print:flex-row gap-4 mb-4 items-start">
               {/* To Section (Left) */}
-              <div>
+              <div className="flex-1 print:flex-1">
                 <div className="font-semibold mb-1 text-sm">To:</div>
                 <div className="mb-1 font-medium text-sm">{data.toCompany}</div>
                 <div className="text-xs whitespace-pre-line mb-1">{data.toAddress}</div>
@@ -64,7 +64,7 @@ export default function InvoicePreview({ data, onClose }: InvoicePreviewProps) {
               </div>
 
               {/* From Section (Right) */}
-              <div className="text-right">
+              <div className="flex-1 text-right print:flex-1 print:text-right">
                 <div className="mb-1">
                   <span className="font-semibold text-sm">From:</span> <span className="text-sm">{data.fromCompany}</span>
                 </div>

@@ -181,5 +181,22 @@ button:active {
   .invoice-preview-container > div:first-child > div {
     page-break-after: auto !important;
   }
+
+  /* Ensure From and To sections align at top when printing */
+  .flex {
+    align-items: flex-start !important;
+  }
+
+  .print\:flex-row {
+    flex-direction: row !important;
+  }
+
+  .print\:flex-1 {
+    flex: 1 1 0% !important;
+  }
+
+  .print\:text-right {
+    text-align: right !important;
+  }
 }
 
