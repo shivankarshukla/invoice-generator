@@ -55,8 +55,9 @@ export default function InvoicePreview({ data, onClose }: InvoicePreviewProps) {
             <div className="flex flex-col md:flex-row print:flex-row gap-4 mb-4 items-start">
               {/* To Section (Left) */}
               <div className="flex-1 print:flex-1">
-                <div className="font-semibold mb-1 text-sm">To:</div>
-                <div className="mb-1 font-medium text-sm">{data.toCompany}</div>
+                <div className="mb-1">
+                  <span className="font-semibold text-sm">To:</span> <span className="font-medium text-sm">{data.toCompany}</span>
+                </div>
                 <div className="text-xs whitespace-pre-line mb-1">{data.toAddress}</div>
                 <div className="text-xs">
                   <span className="font-semibold">GSTIN:</span> {data.toGSTIN}
