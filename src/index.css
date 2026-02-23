@@ -148,12 +148,12 @@ button:active {
     padding: 2rem;
   }
 
-  .print\:pt-20 {
-    padding-top: 5rem;
+  .print\:pt-8 {
+    padding-top: 2rem;
   }
 
-  .print\:h-28 {
-    height: 7rem;
+  .print\:h-44 {
+    height: 11rem;
   }
 
   /* Prevent page breaks inside important sections */

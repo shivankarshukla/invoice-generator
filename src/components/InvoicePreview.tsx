@@ -42,9 +42,9 @@ export default function InvoicePreview({ data, onClose }: InvoicePreviewProps) {
           </div>
 
           {/* Invoice Content - Print Friendly */}
-          <div className="p-6 print:p-8 print:pt-20">
-            {/* Header Space for Company Letterhead */}
-            <div className="h-20 print:h-28 mb-4 border-b-2 border-gray-300"></div>
+          <div className="p-6 print:p-8 print:pt-8">
+            {/* Header Space for Company Letterhead / Stamp */}
+            <div className="h-20 print:h-44 mb-4 border-b-2 border-gray-300"></div>
 
             {/* Invoice Title */}
             <div className="text-center mb-4">
