@@ -10,7 +10,7 @@ const defaultFormData: Partial<InvoiceData> = {
   fromCompany: 'Vedant Enterprises',
   fromGST: '29BMXPK4818G2ZD',
   billNumber: '',
-  year: '25-26',
+  year: '26-27',
   date: new Date().toISOString().split('T')[0],
   toCompany: '',
   toAddress: '',
@@ -144,7 +144,7 @@ export default function InvoiceForm({ onGenerate, initialData }: InvoiceFormProp
                 value={formData.year}
                 onChange={(e) => updateField('year', e.target.value)}
                 className="w-full px-2 py-1.5 md:px-3 md:py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-300 focus:border-purple-300 transition-all"
-                placeholder="25-26"
+                placeholder="26-27"
               />
             </div>
             <div>
