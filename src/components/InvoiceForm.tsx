@@ -17,7 +17,7 @@ const defaultFormData: Partial<InvoiceData> = {
   toGSTIN: '',
   project: '',
     lineItems: [
-      { description: 'RA 01 Bill for Painting work as per the attached Annexure', sacCode: '995473', amount: 0 }
+      { description: 'RA Bill for Painting work as per the attached Annexure', sacCode: '995473', amount: 0 }
     ],
   taxType: 'CGST+SGST',
   taxRate: 18
