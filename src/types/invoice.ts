@@ -5,6 +5,7 @@ export interface InvoiceData {
   
   // Bill details
   billNumber: string;
+  workOrderNo: string;
   year: string;
   date: string;
   

@@ -15,6 +15,7 @@ function App() {
       fromCompany: data.fromCompany,
       fromGST: data.fromGST,
       billNumber: data.billNumber,
+      workOrderNo: data.workOrderNo,
       year: data.year,
       date: data.date,
       toCompany: data.toCompany,

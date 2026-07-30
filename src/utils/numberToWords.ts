@@ -34,8 +34,11 @@ export function numberToWords(amount: number): string {
 
   if (amount === 0) return 'Zero Rupees';
 
-  const rupees = Math.floor(amount);
-  const paise = Math.round((amount - rupees) * 100);
+  // Work in integer paise to avoid floating-point errors (e.g. 499999.9958)
+  // and to guarantee paise stays in the 0-99 range after rounding.
+  const totalPaise = Math.round(amount * 100);
+  const rupees = Math.floor(totalPaise / 100);
+  const paise = totalPaise % 100;
 
   if (rupees === 0 && paise === 0) return 'Zero Rupees';
 

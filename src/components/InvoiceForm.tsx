@@ -10,6 +10,7 @@ const defaultFormData: Partial<InvoiceData> = {
   fromCompany: 'Vedant Enterprises',
   fromGST: '29BMXPK4818G2ZD',
   billNumber: '',
+  workOrderNo: '',
   year: '26-27',
   date: new Date().toISOString().split('T')[0],
   toCompany: '',
@@ -57,11 +58,13 @@ export default function InvoiceForm({ onGenerate, initialData }: InvoiceFormProp
     updateField('lineItems', newItems);
   };
 
+  const round2 = (n: number) => Math.round(n * 100) / 100;
+
   const calculateTotals = () => {
     const items = formData.lineItems || [];
-    const subtotal = items.reduce((sum, item) => sum + (item.amount || 0), 0);
-    const taxAmount = subtotal * ((formData.taxRate || 0) / 100);
-    const grandTotal = subtotal + taxAmount;
+    const subtotal = round2(items.reduce((sum, item) => sum + (item.amount || 0), 0));
+    const taxAmount = round2(subtotal * ((formData.taxRate || 0) / 100));
+    const grandTotal = round2(subtotal + taxAmount);
 
     return { subtotal, taxAmount, grandTotal };
   };
@@ -72,6 +75,7 @@ export default function InvoiceForm({ onGenerate, initialData }: InvoiceFormProp
       fromCompany: formData.fromCompany || 'Vedant Enterprises',
       fromGST: formData.fromGST || '29BMXPK4818G2ZD',
       billNumber: formData.billNumber || '',
+      workOrderNo: formData.workOrderNo || '',
       year: formData.year || '',
       date: formData.date || new Date().toISOString().split('T')[0],
       toCompany: formData.toCompany || '',
@@ -135,6 +139,16 @@ export default function InvoiceForm({ onGenerate, initialData }: InvoiceFormProp
                 onChange={(e) => updateField('billNumber', e.target.value)}
                 className="w-full px-2 py-1.5 md:px-3 md:py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-300 focus:border-purple-300 transition-all"
                 placeholder="Enter bill number"
+              />
+            </div>
+            <div>
+              <label className="block text-xs md:text-sm font-medium mb-0.5">Work Order No.</label>
+              <input
+                type="text"
+                value={formData.workOrderNo}
+                onChange={(e) => updateField('workOrderNo', e.target.value)}
+                className="w-full px-2 py-1.5 md:px-3 md:py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-300 focus:border-purple-300 transition-all"
+                placeholder="Enter work order no."
               />
             </div>
             <div>

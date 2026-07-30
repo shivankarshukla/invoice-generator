@@ -76,6 +76,11 @@ export default function InvoicePreview({ data, onClose }: InvoicePreviewProps) {
                   <div>
                     <span className="font-semibold">Bill No.:</span> {billNumberDisplay}
                   </div>
+                  {data.workOrderNo && (
+                    <div>
+                      <span className="font-semibold">Work Order No.:</span> {data.workOrderNo}
+                    </div>
+                  )}
                   <div>
                     <span className="font-semibold">GST:</span> {data.fromGST}
                   </div>
