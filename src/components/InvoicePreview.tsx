@@ -1,5 +1,8 @@
+import { useRef, useState } from 'react';
+import { Capacitor } from '@capacitor/core';
 import { InvoiceData } from '../types/invoice';
 import { numberToWords } from '../utils/numberToWords';
+import { buildInvoiceFileName, exportInvoicePdf } from '../utils/exportPdf';
 
 interface InvoicePreviewProps {
   data: InvoiceData;
@@ -7,6 +10,24 @@ interface InvoicePreviewProps {
 }
 
 export default function InvoicePreview({ data, onClose }: InvoicePreviewProps) {
+  const invoiceRef = useRef<HTMLDivElement>(null);
+  const [isExporting, setIsExporting] = useState(false);
+  const isNative = Capacitor.isNativePlatform();
+
+  const handleExportPdf = async () => {
+    if (!invoiceRef.current || isExporting) return;
+
+    setIsExporting(true);
+    try {
+      await exportInvoicePdf(invoiceRef.current, buildInvoiceFileName(data.billNumber, data.year));
+    } catch (error) {
+      console.error('Failed to export invoice PDF', error);
+      alert('Could not create the PDF. Please try again.');
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
@@ -27,11 +48,20 @@ export default function InvoicePreview({ data, onClose }: InvoicePreviewProps) {
             <h2 className="text-xl font-bold">Invoice Preview</h2>
             <div className="space-x-2">
               <button
-                onClick={() => window.print()}
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                onClick={handleExportPdf}
+                disabled={isExporting}
+                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-60"
               >
-                Print
+                {isExporting ? 'Preparing...' : isNative ? 'Share PDF' : 'Download PDF'}
               </button>
+              {!isNative && (
+                <button
+                  onClick={() => window.print()}
+                  className="px-4 py-2 bg-slate-600 text-white rounded-md hover:bg-slate-700"
+                >
+                  Print
+                </button>
+              )}
               <button
                 onClick={onClose}
                 className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700"
@@ -42,9 +72,9 @@ export default function InvoicePreview({ data, onClose }: InvoicePreviewProps) {
           </div>
 
           {/* Invoice Content - Print Friendly */}
-          <div className="p-6 print:p-8 print:pt-8">
+          <div ref={invoiceRef} className="p-6 print:p-8 print:pt-8">
             {/* Header Space for Company Letterhead / Stamp */}
-            <div className="h-20 print:h-44 mb-4 border-b-2 border-gray-300"></div>
+            <div data-letterhead-spacer className="h-20 print:h-44 mb-4 border-b-2 border-gray-300"></div>
 
             {/* Invoice Title */}
             <div className="text-center mb-4">
