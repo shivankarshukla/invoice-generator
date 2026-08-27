@@ -13,13 +13,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # The Capacitor 8 CLI refuses to run on anything below Node 22.
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       # Capacitor 8 and Android Gradle Plugin 8.13 require JDK 21.
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: 21
